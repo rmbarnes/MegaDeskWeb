@@ -1,40 +1,27 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
-    Page.Title = "List Movies";
+    Page.Title = "List Desks";
 
-    var db = Database.Open("WebPagesMovies");
-    var selectCommand = "SELECT * FROM Movies";
+    var db = Database.Open("WebDesks");
+    var selectCommand = "SELECT * FROM DeskQuote";
     var searchTerm = "";
 
-    if (!Request.QueryString["searchGenre"].IsEmpty())
+    if (!Request.QueryString["searchCustomer"].IsEmpty())
     {
-        selectCommand = "SELECT * FROM Movies WHERE Genre = @0";
-        searchTerm = Request.QueryString["searchGenre"];
-    }
-
-    if (!Request.QueryString["searchTitle"].IsEmpty())
-    {
-        selectCommand = "SELECT * FROM Movies WHERE Title LIKE @0";
-        searchTerm = "%" + Request.QueryString["searchTitle"] + "%";
+        selectCommand = "SELECT * FROM DeskQuote WHERE CustName LIKE @0";
+        searchTerm = "%" + Request.QueryString["searchCustomer"] + "%";
     }
 
     var selectedData = db.Query(selectCommand, searchTerm);
-    var grid = new WebGrid(source: selectedData, defaultSort: "Genre", rowsPerPage: 3);
+    var grid = new WebGrid(source: selectedData, defaultSort: "CustName", rowsPerPage: 5);
 }
  
-<h2>List Movies</h2>
+<h2>List Desk Quotes</h2>
 <form method="get">
     <div>
-        <label for="searchGenre">Genre to look for:</label>
-        <input type="text" name="searchGenre" value="@Request.QueryString["searchGenre"]" />
-        <input type="Submit" value="Search Genre" /><br />
-        (Leave blank to list all movies.)<br />
-    </div>
-
-    <div>
-        <label for="SearchTitle">Movie title contains the following:</label>
-        <input type="text" name="searchTitle" value="@Request.QueryString["searchTitle"]" />
-        <input type="Submit" value="Search Title" /><br />
+        <label for="searchCustomer">Customer to look for:</label>
+        <input type="text" name="searchCustomer" value="@Request.QueryString["searchCustomer"]" />
+        <input type="Submit" value="Search Customer" /><br/>
     </div>
 </form>
 
@@ -45,9 +32,12 @@
             alternatingRowStyle: "alt",
             columns: grid.Columns(
         grid.Column(format: @<a href="~/EditQuote?id=@item.ID">Edit</a>),
-                grid.Column("Title"),
-                grid.Column("Genre"),
-                grid.Column("Year"),
+                grid.Column("CustName"),
+                grid.Column("Width"),
+                grid.Column("Depth"),
+                grid.Column("Drawers"),
+                grid.Column("QuoteDate"),
+                grid.Column("TotalCost"),
                 grid.Column(format: @<a href="~/DeleteQuote?id=@item.ID">Delete</a>)
                             )
                         )
