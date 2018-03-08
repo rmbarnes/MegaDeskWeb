@@ -3,12 +3,12 @@
     Page.Title = "List Desks";
 
     var db = Database.Open("WebDesks");
-    var selectCommand = "SELECT * FROM DeskQuote";
+    var selectCommand = "SELECT * FROM DeskQuote dq JOIN SurfaceMaterial sf ON dq.MaterialID = sf.ID";
     var searchTerm = "";
 
     if (!Request.QueryString["searchCustomer"].IsEmpty())
     {
-        selectCommand = "SELECT * FROM DeskQuote WHERE CustName LIKE @0";
+        selectCommand = "SELECT * FROM DeskQuote dq JOIN SurfaceMaterial sf ON dq.MaterialID = sf.ID WHERE CustName LIKE @0";
         searchTerm = "%" + Request.QueryString["searchCustomer"] + "%";
     }
 
@@ -38,9 +38,10 @@
                     grid.Column("Drawers"),
                     grid.Column("quoteDate", header:"Date", format:@<text>@item.quoteDate.ToString("MM/dd/yyyy")</text>),
                     grid.Column("TotalCost", header:"Cost"),
+                    grid.Column("Type", header: "Material"),
                     grid.Column(format: @<a class="editButton" href="~/EditQuote?id=@item.ID">Edit</a>),
                     grid.Column(format: @<a class="deleteButton" href="~/DeleteQuote?id=@item.ID">Delete</a>)
                                             )
                                         )
 </div>
-<p><a href="~/AddQuote">Add a quote</a></p>
+<a class="button" href="~/AddQuote">Add a quote</a>
