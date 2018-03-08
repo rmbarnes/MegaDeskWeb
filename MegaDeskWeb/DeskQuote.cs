@@ -53,47 +53,58 @@ namespace MegaDeskWeb
             }
 
             //Find out extra pricing for rush options based on .txt file input
-            ReadRushOrderPrices();
+            //DISABLED FOR NOW!!!! Because I don't know where to put the text file
+            //ReadRushOrderPrices();
             int rushDaysCost = 0;
             if (rushDays == 3)
             {
                 if (area < 1000)
                 {
-                    rushDaysCost = rushOrderOptions[0, 0];
+                    //rushDaysCost = rushOrderOptions[0, 0];
+                    rushDaysCost = 60;
+
                 } else if (area >= 1000 && area <= 2000)
                 {
-                    rushDaysCost = rushOrderOptions[0, 1];
+                    //rushDaysCost = rushOrderOptions[0, 1];
+                    rushDaysCost = 70;
                 } else //The area is > 2000
                 {
-                    rushDaysCost = rushOrderOptions[0, 2];
+                    //rushDaysCost = rushOrderOptions[0, 2];
+                    rushDaysCost = 80;
                 }
             } else if (rushDays == 5)
             {
                 if (area < 1000)
                 {
-                    rushDaysCost = rushOrderOptions[1, 0];
+                    //rushDaysCost = rushOrderOptions[1, 0];
+                    rushDaysCost = 40;
                 }
                 else if (area >= 1000 && area <= 2000)
                 {
-                    rushDaysCost = rushOrderOptions[1, 1];
+                    //rushDaysCost = rushOrderOptions[1, 1];
+                    rushDaysCost = 50;
                 }
                 else //The area is > 2000
                 {
-                    rushDaysCost = rushOrderOptions[1, 2];
+                    //rushDaysCost = rushOrderOptions[1, 2];
+                    rushDaysCost = 60;
                 }
             } else if (rushDays == 7)
             {
                 if (area < 1000)
                 {
-                    rushDaysCost = rushOrderOptions[2, 0]; //array[1][2][2].value
+                    //rushDaysCost = rushOrderOptions[2, 0]; //array[1][2][2].value
+                    rushDaysCost = 30;
                 }
                 else if (area >= 1000 && area <= 2000)
                 {
-                    rushDaysCost = rushOrderOptions[2, 1];
+                    //rushDaysCost = rushOrderOptions[2, 1];
+                    rushDaysCost = 30;
                 }
                 else //The area is > 2000
                 {
-                    rushDaysCost = rushOrderOptions[2, 2];
+                    //rushDaysCost = rushOrderOptions[2, 2];
+                    rushDaysCost = 40;
                 }
             } else //standard shipping
             {
