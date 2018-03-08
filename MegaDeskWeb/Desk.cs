@@ -14,11 +14,11 @@ namespace MegaDeskWeb
 
         public enum Surface
         {
-            Pine, //0
-            Laminate, //1
-            Oak, //2
-            Veneer, //3
-            Rosewood //4
+            Pine = 1, //1
+            Rosewood = 2, //2
+            Veneer = 3, //3
+            Laminate = 4, //4
+            Oak = 5 //5             
         }
     }
 }
