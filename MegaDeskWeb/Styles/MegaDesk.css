@@ -38,6 +38,8 @@ h2 {
     padding: 8px;
     padding-bottom: 4em;
     background-color: White;
+    display: flex;
+    flex-direction: column;
 }
 
 #footer {
@@ -122,7 +124,6 @@ span.dataDisplay {
     border-color: red;
 }
 .button {
-    
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
@@ -132,6 +133,8 @@ span.dataDisplay {
     font-size: 1.2em;
     text-decoration: none;
     text-align: center;
+    border-width: 2px;
+    border-color: #555b6e;
 }
 .button:hover {
     text-decoration: underline;

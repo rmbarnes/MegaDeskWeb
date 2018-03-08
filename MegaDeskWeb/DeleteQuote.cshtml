@@ -47,7 +47,7 @@
 }
     <h1>Delete a Quote</h1>
     @Html.ValidationSummary()
-    <p><a href="~/MegaDesk">Return to quote listing</a></p>
+    <p><a class="button" href="~/MegaDesk">Return to quote listing</a></p>
 
     <form method="post">
         <fieldset>
@@ -80,6 +80,6 @@
             <input type="hidden" name="deskid" value="@deskId" />
             <p><input class="deletePageButton" type="submit" name="buttonDelete" value="Delete Quote" /></p>
         </fieldset>
-        <p><a href="~/MegaDesk">Return to quote listing</a></p>
+        <p><a class="button" href="~/MegaDesk">Return to quote listing</a></p>
     </form>
 
