@@ -2,12 +2,15 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "Add Desk Quote";
 
-    Validation.RequireField("width", "You must enter a valid width");
+    Validation.RequireField("width", "You must enter a width");
+    Validation.Add("width", Validator.Range(12, 96, "Width must be between 12 and 96"));
     Validation.RequireField("depth", "You must enter a valid depth");
+    Validation.Add("depth", Validator.Range(12, 48, "Depth must be between 12 and 48"));
     Validation.RequireField("drawers", "How many drawers?");
+    Validation.Add("drawers", Validator.Range(1, 7, "Choose between 1 and 7 drawers"));
     Validation.RequireField("custName", "What's your name?");
     Validation.RequireField("surface", "What kind of surface material, yo?");
-    Validation.RequireField("rushDays", "Select your rush order date");
+    Validation.RequireField("rushOption", "Select your rush order date");
 
     var width = "";
     var depth = "";
@@ -29,15 +32,11 @@
         drawers = Request.Form["drawers"];
         custName = Request.Form["custName"];
         material = Request.Form["surface"];
+        rushDays = Request.Form["rushOption"];
 
         //Converting the string for material into a Surface Enum.
         Enum.TryParse(material, out MegaDeskWeb.Desk.Surface enumSurface);
         //What is the value of material right here?
-
-        rushDays = Request.Form["rushDays"];
-        //Get total cost from calculating the deskquote
-
-
 
         //get the material id by comparing the enumSurface value
         //Set the foreign key appropriately
@@ -67,8 +66,7 @@
             materialID = 1;
         }
 
-
-
+        //Initialize the desk
         MegaDeskWeb.Desk desk = new MegaDeskWeb.Desk
         {
             Width = int.Parse(width),
@@ -79,8 +77,11 @@
 
         //convert rushdays to an int
         rushDaysInt = int.Parse(rushDays);
+
+        //Create a deskQuote
         MegaDeskWeb.DeskQuote deskQuote = new MegaDeskWeb.DeskQuote(desk, rushDaysInt, custName, quoteDate);
 
+        //Get total cost from calculating the deskquote
         totalCost = deskQuote.getQuote();
 
         var db = Database.Open("WebDesks");
@@ -131,11 +132,15 @@
         </p>
 
         <p>
-            <label for="rushDays">Rush Days:</label>
-            <input type="text" name="rushDays" value="@Request.Form["rushDays"]" />
-            @Html.ValidationMessage("rushDays")
+            Rush Order Options:
+            @Html.RadioButton("rushOption", 3, true) 3 Days
+            @Html.RadioButton("rushOption", 5, false) 5 Days
+            @Html.RadioButton("rushOption", 7, false) 7 Days
+            @Html.RadioButton("rushOption", 14, false) 14 Days
+            @Html.ValidationMessage("rushOption")
         </p>
 
         <p><input type="submit" name="buttonSubmit" value="Add Desk" /></p>
     </fieldset>
 </form>
+<p><a href="~/MegaDesk">Main Menu</a></p>
