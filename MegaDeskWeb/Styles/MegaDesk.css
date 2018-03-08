@@ -29,7 +29,7 @@ h2 {
 #header {
     padding: 8px;
     width: 80%;
-    background-color: #4b6c9e;
+    background-color: #555b6e;
     color: White;
 }
 
@@ -45,22 +45,38 @@ h2 {
     height: 2em;
     padding: 8px;
     margin-top: -2em;
-    background-color: LightGray;
+    background-color: #c0b9dd;
 }
 
 .head {
-    background-color: #E8E8E8;
+    background-color: #DED9E2;
     font-weight: bold;
+    font-size: 1em;
     color: #FFF;
 }
 
+.grid {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
 .grid th, .grid td {
-    border: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.grid th a {
+    text-decoration: none;
+    color: #555b6e;
+}
+.grid th a:hover {
+    text-decoration: underline;
 }
 
 .alt {
-    background-color: #E8E8E8;
+    /* background-color: #c3bcdd;*/
     color: #000;
 }
 
@@ -74,4 +90,42 @@ span.caption {
 
 span.dataDisplay {
     font-weight: bold;
+}
+.editButton {
+    background-color: #89b0ae;
+    color: white;
+    text-decoration: none;
+    padding: inherit;
+}
+.editButton:hover {
+    background-color: #407076;
+    text-decoration: underline;
+}
+.deleteButton {
+    background-color: lightcoral;
+    color: white;
+    text-decoration: none;
+    padding: inherit;
+}
+.deleteButton:hover {
+    background-color: red;
+    text-decoration: underline;
+}
+.deletePageButton {
+    border-radius: 5px;
+    border-color: lightcoral;
+    background-color: lightcoral;
+    padding: 5px;
+}
+.deletePageButton:hover {
+    background-color: red;
+    border-color: red;
+}
+@media(min-width: 800px) {
+    .search {
+        float: right;
+        padding: 10px;
+        padding-right: 10%;
+        margin: -40px;
+    }
 }

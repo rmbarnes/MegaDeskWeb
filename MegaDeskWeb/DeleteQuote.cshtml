@@ -1,9 +1,85 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Delete Quote";
 
-</body>
-</html>
+    var custName = "";
+    var width = "";
+    var depth = "";
+    var drawers = "";
+    var totalCost = "";
+    var deskId = "";
+
+    if (!IsPost)
+    {
+        if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
+        {
+            deskId = Request.QueryString["ID"];
+            var db = Database.Open("WebDesks");
+            var dbCommand = "SELECT * FROM DeskQuote WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, deskId);
+            if (row != null)
+            {
+                custName = row.CustName;
+                width = row.Width;
+                depth = row.Depth;
+                drawers = row.Drawers;
+                totalCost = row.TotalCost;
+            }
+            else
+            {
+                Validation.AddFormError("No quote was found for that ID.");
+            }
+        }
+        else
+        {
+            Validation.AddFormError("No quote was found for that ID.");
+        }
+    }
+
+    if (IsPost && !Request["buttonDelete"].IsEmpty())
+    {
+        deskId = Request.Form["deskId"];
+        var db = Database.Open("WebDesks");
+        var deleteCommand = "DELETE FROM DeskQuote WHERE ID = @0";
+        db.Execute(deleteCommand, deskId);
+        Response.Redirect("~/MegaDesk");
+    }
+}
+    <h1>Delete a Quote</h1>
+    @Html.ValidationSummary()
+    <p><a href="~/MegaDesk">Return to quote listing</a></p>
+
+    <form method="post">
+        <fieldset>
+            <legend>Quote Information</legend>
+
+            <p>
+                <span>Customer Name:</span>
+                <span>@custName</span>
+            </p>
+
+            <p>
+                <span>Width:</span>
+                <span>@width</span>
+            </p>
+
+            <p>
+                <span>Depth:</span>
+                <span>@depth</span>
+            </p>
+            <p>
+                <span>Drawers:</span>
+                <span>@drawers</span>
+            </p>
+            <p>
+                <span>Total Cost:</span>
+                <span>@totalCost</span>
+            </p>
+
+
+            <input type="hidden" name="deskid" value="@deskId" />
+            <p><input class="deletePageButton" type="submit" name="buttonDelete" value="Delete Quote" /></p>
+        </fieldset>
+        <p><a href="~/MegaDesk">Return to quote listing</a></p>
+    </form>
+
