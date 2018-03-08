@@ -121,6 +121,23 @@ span.dataDisplay {
     background-color: red;
     border-color: red;
 }
+.button {
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background-color: #DED9E2;
+    padding: 7px;
+    color: #555b6e;
+    font-size: 1.2em;
+    text-decoration: none;
+    text-align: center;
+}
+.button:hover {
+    text-decoration: underline;
+    background-color: #b6b2b9;
+}
+
 @media(min-width: 800px) {
     .search {
         float: right;
