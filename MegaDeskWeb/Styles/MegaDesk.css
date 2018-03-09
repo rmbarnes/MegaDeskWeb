@@ -5,10 +5,10 @@
 }
 
 body {
-    height: 60%;
-    font-family: 'Trebuchet MS', 'Arial', 'Helvetica', 'sans-serif';
+    height: 100%;
+    font-family: 'Karma', serif;
     font-size: 10pt;
-    background-color: LightGray;
+    background-color: #f0eee3;
     line-height: 1.6em;
 }
 
@@ -29,7 +29,7 @@ h2 {
 #header {
     padding: 8px;
     width: 80%;
-    background-color: #555b6e;
+    background-color: #92a69f;
     color: White;
 }
 
@@ -47,14 +47,16 @@ h2 {
     height: 2em;
     padding: 8px;
     margin-top: -2em;
-    background-color: #c0b9dd;
+    background-color: #b0c7c9;
 }
-
+h2 {
+    margin: auto;
+}
 .head {
-    background-color: #DED9E2;
+    background-color: #c79f71;
     font-weight: bold;
     font-size: 1em;
-    color: #FFF;
+    color: white;
 }
 
 .grid {
@@ -66,12 +68,13 @@ h2 {
 .grid th, .grid td {
     border-bottom: 1px solid #C0C0C0;
     padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 .grid th a {
     text-decoration: none;
-    color: #555b6e;
+    color: white;
+    font-size: 1.2em;
 }
 .grid th a:hover {
     text-decoration: underline;
@@ -113,32 +116,40 @@ span.dataDisplay {
     background-color: red;
     text-decoration: underline;
 }
-.deletePageButton {
+input[type=submit] {
+    background-color: #b0c7c9;
+    color: white;
+    font-family: 'Karma', serif;
+    cursor: pointer;
     border-radius: 5px;
-    border-color: lightcoral;
-    background-color: lightcoral;
-    padding: 5px;
 }
-.deletePageButton:hover {
-    background-color: red;
-    border-color: red;
+input[type=submit]:hover {
+    background-color: #92a69f; 
 }
+input[type=submit].deletePageButton {
+        border-radius: 5px;
+        padding: 5px;
+    }
+input[type=submit].deletePageButton:hover {
+        background-color: red;
+        border-color: red;
+    }
 .button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-    background-color: #DED9E2;
+    background-color: #bead9f;
     padding: 7px;
-    color: #555b6e;
+    color: white;
     font-size: 1.2em;
     text-decoration: none;
     text-align: center;
-    border-width: 2px;
-    border-color: #555b6e;
+    border-radius: 5px;
+    transition: .25s;
 }
 .button:hover {
-    text-decoration: underline;
-    background-color: #b6b2b9;
+    font-size: 1.25em;
+    background-color: #c79f71;
 }
 
 @media(min-width: 800px) {
@@ -146,6 +157,5 @@ span.dataDisplay {
         float: right;
         padding: 10px;
         padding-right: 10%;
-        margin: -40px;
     }
 }

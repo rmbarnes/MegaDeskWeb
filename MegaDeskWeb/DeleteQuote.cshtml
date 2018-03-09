@@ -45,41 +45,41 @@
         Response.Redirect("~/MegaDesk");
     }
 }
-    <h1>Delete a Quote</h1>
-    @Html.ValidationSummary()
-    <p><a class="button" href="~/MegaDesk">Return to quote listing</a></p>
+<h1>Delete a Quote</h1>
+@Html.ValidationSummary()
 
-    <form method="post">
-        <fieldset>
-            <legend>Quote Information</legend>
+<form method="post">
+    <fieldset>
+        <legend>Quote Information</legend>
 
-            <p>
-                <span>Customer Name:</span>
-                <span>@custName</span>
-            </p>
+        <p>
+            <span>Customer Name:</span>
+            <span>@custName</span>
+        </p>
 
-            <p>
-                <span>Width:</span>
-                <span>@width</span>
-            </p>
+        <p>
+            <span>Width:</span>
+            <span>@width</span>
+        </p>
 
-            <p>
-                <span>Depth:</span>
-                <span>@depth</span>
-            </p>
-            <p>
-                <span>Drawers:</span>
-                <span>@drawers</span>
-            </p>
-            <p>
-                <span>Total Cost:</span>
-                <span>@totalCost</span>
-            </p>
+        <p>
+            <span>Depth:</span>
+            <span>@depth</span>
+        </p>
+        <p>
+            <span>Drawers:</span>
+            <span>@drawers</span>
+        </p>
+        <p>
+            <span>Total Cost:</span>
+            <span>@totalCost</span>
+        </p>
 
 
-            <input type="hidden" name="deskid" value="@deskId" />
-            <p><input class="deletePageButton" type="submit" name="buttonDelete" value="Delete Quote" /></p>
-        </fieldset>
-        <p><a class="button" href="~/MegaDesk">Return to quote listing</a></p>
-    </form>
+        <input type="hidden" name="deskid" value="@deskId" />
+        <p><input class="deletePageButton" type="submit" name="buttonDelete" value="Delete Quote" /></p>
+    </fieldset>
+</form>
+<a class="button" href="~/MegaDesk">Return to Main Menu</a>
+
 
