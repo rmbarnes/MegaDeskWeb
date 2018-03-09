@@ -1,9 +1,95 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Edit Quote";
 
-</body>
-</html>
+    var custName = "";
+    var width = "";
+    var depth = "";
+    var drawers = "";
+    var totalCost = "";
+    var deskId = "";
+
+    if (!IsPost)
+    {
+        if (!Request.QueryString["ID"].IsEmpty() && Request.QueryString["ID"].IsInt())
+        {
+            deskId = Request.QueryString["ID"];
+            var db = Database.Open("WebDesks");
+            var dbCommand = "SELECT * FROM DeskQuote WHERE ID = @0";
+            var row = db.QuerySingle(dbCommand, deskId);
+
+            if (row != null)
+            {
+                custName = row.CustName;
+                width = row.Width;
+                depth = row.Depth;
+                drawers = row.Drawers;
+                totalCost = row.TotalCost;
+            }
+            else
+            {
+                Validation.AddFormError("No quote was found for that ID.");
+            }
+        }
+        else
+        {
+            Validation.AddFormError("No quote was found for that ID.");
+        }
+    }
+
+    if (IsPost)
+    {
+        Validation.RequireField("custName", "You must enter your name");
+        Validation.RequireField("width", "Width is required");
+        Validation.RequireField("depth", "You haven't entered a depth");
+        Validation.RequireField("deskid", "No desk ID was submitted!");
+
+        custName = Request.Form["custName"];
+        width = Request.Form["width"];
+        depth = Request.Form["depth"];
+        drawers = Request.Form["drawers"];
+
+        deskId = Request.Form["deskId"];
+
+        if (Validation.IsValid())
+        {
+            var db = Database.Open("WebDesks");
+            var updateCommand = "UPDATE DeskQuote SET CustName=@0, Width=@1, Depth=@2, Drawers=@3 WHERE Id=@4";
+            db.Execute(updateCommand, custName, width, depth, drawers, deskId);
+            Response.Redirect("~/MegaDesk");
+        }
+    }
+}
+
+    <h2>Edit Quote</h2>
+    @Html.ValidationSummary()
+    <form method="post">
+        <fieldset>
+            <legend>Quote Information</legend>
+
+            <p>
+                <label for="custName">Your Name:</label>
+                <input type="text" name="custName" value="@custName" />
+            </p>
+
+            <p>
+                <label for="width">Width:</label>
+                <input type="text" name="width" value="@width" />
+            </p>
+
+            <p>
+                <label for="depth">Depth:</label>
+                <input type="text" name="depth" value="@depth" />
+            </p>
+            <p>
+                <label for="drawers">Drawers:</label>
+                <input type="text" name="drawers" value="@drawers" />
+            </p>
+
+            <input type="hidden" name="deskid" value="@deskId" />
+
+            <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
+        </fieldset>
+    </form>
+    <a class="button" href="~/MegaDesk">Return to Main Menu</a>
+
